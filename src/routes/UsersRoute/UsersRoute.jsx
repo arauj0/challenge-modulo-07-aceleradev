@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+// , { useState, useEffect } 
 
-// import UsersList from '../../containers/UsersList/UsersList';
+import UsersList from '../../containers/UsersList';
 
 const UsersRoute = () => {
   return (
-    <div className="container">
-      <h1>Users</h1>
+    <div className="container" data-testid="users-route">
+      <UsersList />
     </div>
   );
 };
