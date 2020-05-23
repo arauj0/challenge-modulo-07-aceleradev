@@ -18,14 +18,14 @@ const Topbar = () => (
       <div className="topbar__group">
         <div className="topbar__icon">
           <Link to='/users'>
-            <i class="fas fa-users"></i>
+            <i className="fas fa-users"></i>
             <span>Usuários</span>
           </Link>
         </div>
 
         <div className="topbar__icon">
           <Link to='/newuser'>
-            <i class="fas fa-user-plus"></i>
+            <i className="fas fa-user-plus"></i>
             <span>Nova Conta</span>
           </Link>
         </div>
