@@ -14,7 +14,7 @@ const Posts = ({ posts, getUserHandler }) => {
             key={post.id}
           />
         ))
-      }
+        }
       </section>
     </div>
   );

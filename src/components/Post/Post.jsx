@@ -37,7 +37,7 @@ const Post = ({ postInfo, userInfo }) => {
 
           <div className="post__status">
             <div className="user">
-              <span>curtido por <Link to="/">{comments[0].name}</Link> e outra 
+              <span>curtido por <Link to="/">{comments[0]?.name}</Link> e outra 
               {comments.length} pessoas</span>
             </div>
           </div>

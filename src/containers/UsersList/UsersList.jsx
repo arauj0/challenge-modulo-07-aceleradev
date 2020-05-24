@@ -5,7 +5,7 @@ import User from '../../components/User';
 
 import './UsersList.scss';
 
-const UersList = ({ users }) => {
+const UsersList = ({ users }) => {
   const infoUser = {
     avatar: 'https://viniciusvinna.netlify.app/assets//api-instagram/profiles/black-panther/black-panther-profile.jpg',
     name: "T'Challa",
@@ -27,4 +27,4 @@ const UersList = ({ users }) => {
   )
 };
 
-export default UersList;
+export default UsersList;
