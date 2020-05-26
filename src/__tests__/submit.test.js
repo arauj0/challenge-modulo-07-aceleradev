@@ -19,16 +19,10 @@ import UserForm from '../containers/UserForm';
 import UserPosts from '../containers/UserPosts';
 import UserProfile from '../containers/UserProfile';
 
-// import FeedRoute from '../routes/FeedRoute';
-// import NewUserRoute from '../routes/NewUserRoute';
-// import ProfileRoute from '../routes/ProfileRoute';
-// import UsersRoute from '../routes/UsersRoute';
-
-// import comments from './mocks/comments';
-// import likes from './mocks/likes';
-// import postsMock from './mocks/posts';
-// import stories from './mocks/stories';
-// import usersMock from './mocks/users';
+import FeedRoute from '../routes/FeedRoute';
+import NewUserRoute from '../routes/NewUserRoute';
+import ProfileRoute from '../routes/ProfileRoute';
+import UsersRoute from '../routes/UsersRoute';
 
 const history = createMemoryHistory();
 
@@ -115,7 +109,7 @@ describe('React Instagram APP', () => {
       expect(container).toBeDefined();
     });
 
-    it('should should render properly the <App> component', () => {
+    it('should should render properly the <App> container', () => {
       const { getByTestId } = render(
         <Router history={history}>
           <App />
@@ -126,7 +120,7 @@ describe('React Instagram APP', () => {
       expect(container).toBeDefined();
     });
 
-    it('should should render properly the <Posts> component', () => {
+    it('should should render properly the <Posts> container', () => {
       const propsMock = {
         posts: [],
       };
@@ -141,7 +135,7 @@ describe('React Instagram APP', () => {
       expect(container).toBeDefined();
     });
 
-    it('should should render properly the <Stories> component', () => {
+    it('should should render properly the <Stories> container', () => {
       const propsMock = {
         stories: [],
       };
@@ -157,7 +151,7 @@ describe('React Instagram APP', () => {
       expect(container).toBeDefined();
     });
 
-    it('should should render properly the <UserForm> component', () => {
+    it('should should render properly the <UserForm> container', () => {
       const { getByTestId } = render(
         <Router history={history}>
           <UserForm />
@@ -168,7 +162,7 @@ describe('React Instagram APP', () => {
       expect(container).toBeDefined();
     });
 
-    it('should should render properly the <UserPosts> component', () => {
+    it('should should render properly the <UserPosts> container', () => {
       const propsMock = {
         posts: [],
       };
@@ -183,7 +177,7 @@ describe('React Instagram APP', () => {
       expect(container).toBeDefined();
     });
 
-    it('should should render properly the <UserProfile> component', () => {
+    it('should should render properly the <UserProfile> container', () => {
       const propsMock = {
         avatar: '',
         name: '',
@@ -199,5 +193,51 @@ describe('React Instagram APP', () => {
 
       expect(container).toBeDefined();
     });
-  })
+  });
+
+  it('should should render properly the <FeedRoute> component', () => {
+    const { getByTestId } = render(
+      <Router history={history}>
+        <FeedRoute />
+      </Router>
+    );
+    const container = getByTestId('feed-route');
+
+    expect(container).toBeDefined();
+  });
+
+  it('should should render properly the <NewUserRoute> component', () => {
+    const { getByTestId } = render(
+      <Router history={history}>
+        <NewUserRoute />
+      </Router>
+    );
+    const container = getByTestId('new-user-route');
+
+    expect(container).toBeDefined();
+  });
+
+  it('should should render properly the <ProfileRoute> component', () => {
+    const { getByTestId } = render(
+      <Router history={history}>
+        <ProfileRoute />
+      </Router>
+    );
+
+    const container = getByTestId('profile-route');
+
+    expect(container).toBeDefined();
+  });
+
+  it('should should render properly the <UsersRoute> component', () => {
+    const { getByTestId } = render(
+      <Router history={history}>
+        <UsersRoute />
+      </Router>
+    );
+    const container = getByTestId('users-route');
+
+    expect(container).toBeDefined();
+  });
 });
+
