@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const User = ({ infoUser })  => {
-  const {avatar, name, username, } = infoUser;
+  const { avatar, name, username } = infoUser;
   const url = `/users/${username}`;
 
   return (
