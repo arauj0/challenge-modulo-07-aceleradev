@@ -1,38 +1,51 @@
-import React from "react";
-// , { useState }
+import React, { useState } from "react";
 
-// import Story from '../../components/Story';
+import Story from '../../components/Story';
 
 import './Stories.scss';
 
 const Stories = ({ stories, getUserHandler }) => {
+  const [showStory, setShowStory] = useState(false);
+  const [selectedStory, setSelectedStory] = useState({});
+  const [selectedUser, setSelectedUser] = useState({});
+
+  const handleStory = (story, user) => {
+    setSelectedStory(story);
+    setSelectedUser(user);
+    setShowStory(!showStory);
+  }
+
   return (
     <>
       <section className="stories" data-testid="stories">
         <div className="container">
-          <button className="user__thumb user__thumb--hasNew">
-            <div className="user__thumb__wrapper">
-              <img src="https://viniciusvinna.netlify.app/assets//api-instagram/profiles/black-panther/black-panther-profile.jpg" alt="perfil pantera"/>
-            </div>
-          </button>
+        {stories?.map((story, index) => {
+            const user = getUserHandler(story.userId);
 
-          <button className="user__thumb">
-            <div className="user__thumb__wrapper">
-              <img src="https://viniciusvinna.netlify.app/assets//api-instagram/profiles/black-panther/black-panther-profile.jpg" alt="perfil pantera"/>
-            </div>
-          </button>
-
-          <button className="user__thumb">
-            <div className="user__thumb__wrapper">
-              <img src="https://viniciusvinna.netlify.app/assets//api-instagram/profiles/black-panther/black-panther-profile.jpg" alt="perfil pantera"/>
-            </div>
-          </button>
+            return (
+              user && (
+                <button
+                  key={story.id}
+                  onClick={() => handleStory(story, user)}
+                  className={`user__thumb ${index === 0 && 'user__thumb--hasNew'}`}
+                >
+                  <div className="user__thumb__wrapper">
+                    <img src={user?.avatar} alt={user?.name} />
+                  </div>
+                </button>
+              )
+            )
+          })}
         </div>
       </section>
 
-      {/* {showStory && (
-        <Story />
-        )} */}
+      {showStory && (
+        <Story 
+          story={selectedStory}
+          user={selectedUser}
+          handleClose={() => setShowStory(!showStory)}
+        />
+      )}
     </>
   );
 };

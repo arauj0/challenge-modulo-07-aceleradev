@@ -10,9 +10,10 @@ import Posts from '../../containers/Posts';
 import './FeedRoute.scss';
 
 const FeedRoute = () => {
-  const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [usersFetched, setUsersFetched] = useState(0);
+  const [stories, setStories] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const loadUsers = () => {
     fetch('https://5e7d0266a917d70016684219.mockapi.io/api/v1/users')
@@ -20,37 +21,55 @@ const FeedRoute = () => {
       .then(data => setUsers(data));
   }
 
+  const loadPosts = () => {
+    if (users.length) {
+      for (const user of users) {
+        fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${user.id}/posts`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.length) setPosts(previous => ([...previous, ...data]));
+            
+            setLoading(false);
+          });
+      }  
+    }
+  }
+
+  const loadStories = () => {
+    fetch('https://5e7d0266a917d70016684219.mockapi.io/api/v1/stories')
+      .then(response => response.json())
+      .then(data => setStories(data));
+  }
+
   useEffect(() => {
     loadUsers();
   }, []);
 
   useEffect(() => {
-    if (usersFetched === users.length) {
-      return;
-    }
+    loadPosts();
+  }, [users]);
 
-    fetch(`https://5e7d0266a917d70016684219.mockapi.io/api/v1/users/${users[usersFetched].id}/posts`)
-      .then((res) => res.json())
-      .then(data => {
-        if (data.length > 0) setPosts([...posts, ...data]);
+  useEffect(() => {
+    loadStories();
+  }, [users]);
 
-        setUsersFetched(usersFetched + 1);
-      });
-  }, [users, usersFetched]);
-
-  const getUserById = postUserId => users.find(user => postUserId === user.id);
+  const getUserHandler = userId => users.find(user => userId === user.id);
 
   return (
-    <div data-testid="feed-route">
-      <Stories />
-      
-      {users.length !== usersFetched
-        ? (<Loading />)
-        : (
+    <div data-testid="feed-route">      
+      {loading
+        ? <Loading />
+        : 
+          <>
+          <Stories 
+            stories={stories}
+            getUserHandler={getUserHandler} 
+          />
           <Posts
             posts={posts}
-            getUserHandler={getUserById}
-          />)
+            getUserHandler={getUserHandler}
+          />
+          </>
       }
     </div>
   );
